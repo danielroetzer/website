@@ -1,3 +1,4 @@
+# https://docs.astro.build/en/guides/deploy/github/#configure-a-github-action
 name: Deploy to GitHub Pages
 
 on:
@@ -6,7 +7,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: gh-pages
+  group: github-pages
   cancel-in-progress: false
 
 # Allow this job to clone the repo and create a page deployment
@@ -23,11 +24,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup
-        uses: ./.github/actions/setup
-
-      - name: Run build
-        run: pnpm build
+      - name: Install dependencies, run build and upload as artifact
+        uses: withastro/action@v3
 
   deploy:
     name: Deploy
