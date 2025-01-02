@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const companies = await getCollection('companies');
+  const companyProjects = await getCollection('companyProjects');
+
+  return companies.map((company) => {
+    const projects = companyProjects.filter(
+      (project) => project.data.company.id === company.id,
+    );
+
+    return {
+      params: { companyId: company.id },
+      props: { company, projects },
+    };
+  });
+}
+
+const { company, projects } = Astro.props;
+---
+
+<Layout>
+  <h1>{company.data.name}</h1>
+  <ul>
+    {
+      projects.map((project) => (
+        <li>
+          <a
+            href={`${import.meta.env.BASE_URL}/companies/${company.data.slug}/${project.data.slug}`}
+          >
+            {project.data.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

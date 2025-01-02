@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const companies = await getCollection('companies');
+---
+
+<Layout>
+  <h1>Companies</h1>
+  <ul>
+    {
+      companies.map((company) => (
+        <li>
+          <a href={`${import.meta.env.BASE_URL}/companies/${company.id}`}>
+            {company.data.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
