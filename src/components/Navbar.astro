@@ -33,9 +33,7 @@ const routes = [
 <script>
   const button = document.querySelector('button.theme-toggle');
 
-  if (!button) return;
-
-  button.addEventListener('click', () => {
+  button?.addEventListener('click', () => {
     const theme =
       document.documentElement.getAttribute('data-color-scheme') ?? 'light';
 
