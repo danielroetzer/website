@@ -1,0 +1,50 @@
+---
+const baseUrl = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+
+const routes = [
+  {
+    href: baseUrl,
+    name: 'Home',
+  },
+  {
+    href: `${baseUrl}/companies`,
+    name: 'Projects',
+  },
+].map((route) => ({
+  ...route,
+  isActive: [route.href, `${route.href}/`].includes(pathname),
+}));
+---
+
+<nav>
+  <menu>
+    {
+      routes.map((route) => (
+        <li class:list={[{ selected: route.isActive }]}>
+          <a href={route.href}>{route.name}</a>
+        </li>
+      ))
+    }
+    <button class="theme-toggle">Toggle Theme</button>
+  </menu>
+</nav>
+
+<script>
+  const button = document.querySelector('button.theme-toggle');
+
+  if (!button) return;
+
+  button.addEventListener('click', () => {
+    const theme =
+      document.documentElement.getAttribute('data-color-scheme') ?? 'light';
+
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-color-scheme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-color-scheme', 'light');
+      localStorage.setItem('theme', 'light');
+    }
+  });
+</script>
