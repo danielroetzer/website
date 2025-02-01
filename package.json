@@ -16,7 +16,6 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write ."
   },
-  "dependencies": {},
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/ts-plugin": "^1.10.4",
@@ -24,5 +23,9 @@
     "prettier": "3.4.2",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@astrojs/solid-js": "^5.0.1",
+    "solid-js": "^1.9.3"
   }
 }

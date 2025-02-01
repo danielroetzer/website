@@ -4,6 +4,8 @@
   "exclude": ["dist"],
 
   "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
